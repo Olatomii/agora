@@ -1,0 +1,12 @@
+import { useEffect, useRef, type ReactNode } from 'react';
+import { X, ArrowUpRight } from 'lucide-react';
+import type { Person } from './model';
+export function Avatar({ person, small = false }: { person: Person; small?: boolean }) { return <span aria-hidden="true" className={`avatar ${person.color} ${small ? 'small' : ''}`}>{person.initials}</span>; }
+export function Modal({ title, children, onClose }: { title: string; children: ReactNode; onClose: () => void }) {
+  const ref = useRef<HTMLDialogElement>(null);
+  const trigger = useRef(document.activeElement instanceof HTMLElement ? document.activeElement : null);
+  useEffect(() => { const d = ref.current; d?.showModal(); return () => { d?.close(); trigger.current?.focus(); }; }, []);
+  return <dialog ref={ref} aria-labelledby="dialog-title" onCancel={onClose} onClick={e => { if (e.target === ref.current) { const r = ref.current.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) onClose(); } }}><div className="dialog-head"><h2 id="dialog-title">{title}</h2><button className="icon-btn" aria-label="Close dialog" onClick={onClose}><X size={20}/></button></div>{children}</dialog>;
+}
+export function Empty({ title, children }: { title: string; children: ReactNode }) { return <div className="empty"><span className="empty-mark">a.</span><h2>{title}</h2><p>{children}</p></div>; }
+export function Principles({onOpenLab}:{onOpenLab:()=>void}) { return <aside className="context-rail"><section className="rail-format"><span className="eyebrow">MAKE ROOM FOR THE OTHER SIDE</span><h2>A question.<br/>Two perspectives.</h2><p>Turn a conversation into a structured practice match.</p><ol><li><span>01</span><div><strong>Opening</strong><small>State your position.</small></div></li><li><span>02</span><div><strong>Rebuttal</strong><small>Address the strongest point.</small></div></li><li><span>03</span><div><strong>Closing</strong><small>Bring your case together.</small></div></li></ol><button className="secondary" onClick={onOpenLab}>Explore debate formats <ArrowUpRight size={16}/></button></section><section className="rail-note"><span className="eyebrow">A SHARED STANDARD</span><h3>Curiosity over certainty.</h3><p>Challenge the idea, not the person. Support factual claims. Be willing to acknowledge a good point.</p></section><div className="rail-footer">Sample conversations, real interaction.<br/>No public posts or invitations are sent.</div></aside>; }
