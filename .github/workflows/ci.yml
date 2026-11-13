@@ -17,8 +17,8 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
-      - run: node export-preview.mjs
+      - run: node export-preview.mjs dist/agora-preview.html
       - uses: actions/upload-artifact@v4
         with:
           name: agora-browser-preview
-          path: ../agora-preview.html
+          path: dist/agora-preview.html
