@@ -2,7 +2,7 @@
 
 A React and TypeScript discussion workspace with structured practice and a separate local AI debate lab. The redesigned interface uses self-hosted DM Sans, cream and ink surfaces, restrained burnt-orange actions, editorial headlines and neutral perspective markers, light and dark themes, a compact desktop sidebar and mobile navigation.
 
-[Try the browser demo](https://olatomii-portfolio.onrender.com/demos/agora.html) · [Portfolio case study](https://olatomii-portfolio.onrender.com/projects/agora)
+[Try the browser demo](https://olatomii-agora.pages.dev/) · [Portfolio case study](https://olatomii-portfolio.pages.dev/projects/agora)
 
 ![Agora discussion workspace](docs/preview.webp)
 
@@ -49,3 +49,9 @@ Production would require authenticated identity, durable authoritative state, pe
 ## Continuous integration
 
 GitHub Actions runs the tests and production build on pushes and pull requests, then saves the self-contained browser preview as a downloadable artifact. Tests mock the AI provider and require no API key.
+
+## Cloudflare Pages preview
+
+The public demo is hosted at https://olatomii-agora.pages.dev/ as static files, with no sleeping application server. Build with `npm run build`, then `node export-preview.mjs dist/index.html`, and deploy from this repository using `npx wrangler pages deploy dist --project-name olatomii-agora --branch main`. The export explicitly disables live AI/provider requests. No secrets are included in this deployment. Browser-local data is specific to this new origin; previous demo data stays in the old browser origin.
+
+This is a direct-upload Pages project; a GitHub push does not automatically deploy it. Run the commands above after tests pass.
