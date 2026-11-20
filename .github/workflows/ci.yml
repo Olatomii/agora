@@ -18,6 +18,9 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: node export-preview.mjs dist/agora-preview.html
+      - run: node export-preview.mjs dist/index.html
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
       - uses: actions/upload-artifact@v4
         with:
           name: agora-browser-preview

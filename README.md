@@ -55,3 +55,9 @@ GitHub Actions runs the tests and production build on pushes and pull requests, 
 The public demo is hosted at https://olatomii-agora.pages.dev/ as static files, with no sleeping application server. Build with `npm run build`, then `node export-preview.mjs dist/index.html`, and deploy from this repository using `npx wrangler pages deploy dist --project-name olatomii-agora --branch main`. The export explicitly disables live AI/provider requests. No secrets are included in this deployment. Browser-local data is specific to this new origin; previous demo data stays in the old browser origin.
 
 This is a direct-upload Pages project; a GitHub push does not automatically deploy it. Run the commands above after tests pass.
+
+## Discussion to practice
+
+Discussion pages pair a reading column with a participant and round guide. Readers can save the thread, jump to the reply composer, and prepare a practice argument in two steps. Reviewing and editing preserves the position; consent is required before creating the local invitation. Sessions retain the existing three-round state machine and scripted responses. No public discussions or live invitations are sent.
+
+Browser regression: `npm run build`, `node export-preview.mjs dist/index.html`, `npx playwright install chromium`, then `npm run test:e2e`. The test covers a 320px viewport, save/reply actions, editable practice setup, all rounds and transcript persistence after reload. GitHub Actions runs this alongside the model/engine tests.
